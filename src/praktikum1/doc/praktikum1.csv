@@ -1,0 +1,22 @@
+			
+Protokoll	Einträge		
+0x8912	28		
+ARP	115		Address Resolution Protocol; setzt IP-Adressen in Hardware und MAC-Adressen um; Sicherungsschicht
+BROWSER	6		
+DB-LSP-DISC	30		
+DHCP	5		
+DHCPv6	20		
+DNS	120		Domain Name System; dient zur Namensauflösung (in IP-Adressen); Anwendungsschicht
+HomePlug AV	27		
+HTTP	95		Hypertext Transfer Protocol; zustandsloses Protokoll zur Übertragung von Daten; Anwendungschicht
+ICMPv6	28		
+LLMNR	10		
+NBNS	15		
+NTP	2		
+SMB	400		Server Message Block; ist ein Netzwerkprotokoll für Datei-, Druck- und andere Serverdienste; Anwendungsschicht
+SMB_NETLOGON	1		
+SSDP	6		
+STP	15		
+TCP	918		Transmission Control Protocol; ist ein zuverlässiges, verbinsundorientiertes, paketvermittelndes Transportprotokoll; Transportschicht
+TLSv1.2	125		Transport Layer Security; ist der nachfolger von SSL und ist ein hybrides Verschlüsselungsprotokoll zur sicheren Dateiübertragung; Transportschicht
+UDP	13		
