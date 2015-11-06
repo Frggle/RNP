@@ -1,5 +1,3 @@
-package praktikum1;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -35,7 +33,7 @@ public class MailFile {
 		prop = new Properties();
 		BufferedInputStream input = null;
 		try {
-			input = new BufferedInputStream(new FileInputStream("src/praktikum1/usrProp"));
+			input = new BufferedInputStream(new FileInputStream("src/usrProp"));
 			prop.load(input);
 		} catch(IOException e) {
 			System.err.println("Fehler beim Laden der Props" + e);
@@ -81,20 +79,20 @@ public class MailFile {
 			send("To: ");
 			send("Subject: " + prop.getProperty("betreff"));
 			send("MIME-Version: 1.0");
-			send("ContentType: multipart/mixed; boundary=" + BOUNDARY);
-			
+			send("Content-Type: multipart/mixed; boundary=" + BOUNDARY);
+			send("");
 			send("--" + BOUNDARY);
 			send("Content-Transfer-Encoding: quoted-printable");
 			send("Content-Type: text/plain");
+			send("");
 			send(prop.getProperty("inhalt"));
 			send("--" + BOUNDARY);
-			
 			send("Content-Transfer-Encoding: base64");
 			send("Content-Type: application/txt");
 			send("Content-Disposition: attachment; filename=" + file.getName());
+			send("");
 			send(Base64.encodeBytes(Files.readAllBytes(file.toPath())));
 			send("--" + BOUNDARY + "--");
-			
 			send(".");
 			send("QUIT");
 			receive();
@@ -147,7 +145,7 @@ public class MailFile {
 		MailFile mf = new MailFile();
 		String log = mf.sendMail(args[0], args[1]);
 		try {
-			File logFile = new File(args[1] + "/log.txt");
+			File logFile = new File("src/log.txt");
 			FileWriter writer = new FileWriter(logFile);
 			writer.write(log);
 			writer.flush();

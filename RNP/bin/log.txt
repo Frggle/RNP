@@ -1,0 +1,48 @@
+
+LOG START::
+>>EHLO mailgate.informatik.haw-hamburg.de
+<<220 mailgate.informatik.haw-hamburg.de ESMTP Postfix
+>>AUTH LOGIN
+<<250-mailgate.informatik.haw-hamburg.de
+<<250-PIPELINING
+<<250-SIZE 26214400
+<<250-ETRN
+<<250-STARTTLS
+<<250-AUTH PLAIN LOGIN
+<<250-AUTH=PLAIN LOGIN
+<<250-ENHANCEDSTATUSCODES
+<<250-8BITMIME
+<<250 DSN
+>>cm5wMjAxNQ==
+<<334 VXNlcm5hbWU6
+>>QXVmZ2FiZTE=
+<<334 UGFzc3dvcmQ6
+>>MAIL From: rnp2015@informatik.haw-hamburg.de
+<<235 2.7.0 Authentication successful
+>>RCPT To: marc.kaepke@haw-hamburg.de
+<<250 2.1.0 Ok
+>>DATA
+<<250 2.1.5 Ok
+>>From: 
+<<354 End data with <CR><LF>.<CR><LF>
+>>To: 
+>>Subject: RNP Aufgabe 1
+>>MIME-Version: 1.0
+>>Content-Type: multipart/mixed; boundary=98766789
+>>
+>>--98766789
+>>Content-Transfer-Encoding: quoted-printable
+>>Content-Type: text/plain
+>>
+>>Moin Moin
+>>--98766789
+>>Content-Transfer-Encoding: base64
+>>Content-Type: application/txt
+>>Content-Disposition: attachment; filename=test.txt
+>>
+>>SGFsbG8gQW5uYQpEaWVzIGlzdCBlaW4gQW5oYW5n
+>>--98766789--
+>>.
+>>QUIT
+<<250 2.0.0 Ok: queued as DE90D10679CF
+<<221 2.0.0 Bye
