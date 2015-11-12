@@ -1,8 +1,7 @@
 
 LOG START::
->>EHLO mailgate.informatik.haw-hamburg.de
 <<220 mailgate.informatik.haw-hamburg.de ESMTP Postfix
->>AUTH LOGIN
+>>EHLO mailgate.informatik.haw-hamburg.de
 <<250-mailgate.informatik.haw-hamburg.de
 <<250-PIPELINING
 <<250-SIZE 26214400
@@ -13,18 +12,19 @@ LOG START::
 <<250-ENHANCEDSTATUSCODES
 <<250-8BITMIME
 <<250 DSN
->>cm5wMjAxNQ==
+>>AUTH LOGIN
 <<334 VXNlcm5hbWU6
->>QXVmZ2FiZTE=
+>>cm5wMjAxNQ==
 <<334 UGFzc3dvcmQ6
->>MAIL From: rnp2015@informatik.haw-hamburg.de
+>>QXVmZ2FiZTE=
 <<235 2.7.0 Authentication successful
->>RCPT To: marc.kaepke@haw-hamburg.de
+>>MAIL From: rnp2015@informatik.haw-hamburg.de
 <<250 2.1.0 Ok
->>DATA
+>>RCPT To: marc.kaepke@haw-hamburg.de
 <<250 2.1.5 Ok
->>From: 
+>>DATA
 <<354 End data with <CR><LF>.<CR><LF>
+>>From: 
 >>To: 
 >>Subject: RNP Aufgabe 1
 >>MIME-Version: 1.0
@@ -34,7 +34,9 @@ LOG START::
 >>Content-Transfer-Encoding: quoted-printable
 >>Content-Type: text/plain
 >>
->>Moin Moin
+>>..Moin 
+...Mo.in.
+
 >>--98766789
 >>Content-Transfer-Encoding: base64
 >>Content-Type: application/txt
@@ -43,6 +45,6 @@ LOG START::
 >>SGFsbG8gQW5uYQpEaWVzIGlzdCBlaW4gQW5oYW5n
 >>--98766789--
 >>.
+<<250 2.0.0 Ok: queued as 5C82B10679CF
 >>QUIT
-<<250 2.0.0 Ok: queued as DE90D10679CF
 <<221 2.0.0 Bye

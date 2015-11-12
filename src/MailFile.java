@@ -11,6 +11,8 @@ import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.util.Properties;
 
+import javax.net.ssl.SSLSocketFactory;
+
 public class MailFile {
 	
 	private Socket so;
@@ -48,6 +50,19 @@ public class MailFile {
 		}
 	}
 	
+	private String manipulate(String input) {
+		String newString = "";
+		
+		String[] result = input.split("\n");
+		
+		for(int i = 0; i < result.length; i++) {
+			if(result[i].startsWith(".") && !result[i].substring(0, 1).equals("..")) {
+				newString += "." + result[i] + "\n";
+			}
+		}
+		return newString;
+	}
+	
 	private String sendMail(String target, String path) {
 		log = "\nLOG START::\r\n";
 		File file = new File(path);
@@ -55,11 +70,19 @@ public class MailFile {
 		try {
 			userBase64 = Base64.encodeBytes(prop.getProperty("benutzer").getBytes());
 			passwordBase64 = Base64.encodeBytes(prop.getProperty("passwort").getBytes());
-						
-			so = new Socket(prop.getProperty("hostname"), Integer.parseInt(prop.getProperty("port")));
+			
+			int port = Integer.parseInt(prop.getProperty("port"));
+			if(port == 25) {
+				so = new Socket(prop.getProperty("hostname"), Integer.parseInt(prop.getProperty("port")));
+			} else if(port == 465) {
+				SSLSocketFactory sslSo = (SSLSocketFactory) SSLSocketFactory.getDefault();
+				so= sslSo.createSocket(prop.getProperty("hostname"), port);
+			}
+					
 			outToServer = new DataOutputStream(so.getOutputStream());
 			inFromServer = new BufferedReader(new InputStreamReader(so.getInputStream()));
 			
+			receive();
 			send("EHLO " + prop.getProperty("hostname"));
 			receive();
 			send("AUTH LOGIN");
@@ -75,7 +98,6 @@ public class MailFile {
 			send("DATA");
 			receive();
 			send("From: ");
-			receive();
 			send("To: ");
 			send("Subject: " + prop.getProperty("betreff"));
 			send("MIME-Version: 1.0");
@@ -85,7 +107,7 @@ public class MailFile {
 			send("Content-Transfer-Encoding: quoted-printable");
 			send("Content-Type: text/plain");
 			send("");
-			send(prop.getProperty("inhalt"));
+			send(manipulate(prop.getProperty("inhalt")));
 			send("--" + BOUNDARY);
 			send("Content-Transfer-Encoding: base64");
 			send("Content-Type: application/txt");
@@ -94,6 +116,7 @@ public class MailFile {
 			send(Base64.encodeBytes(Files.readAllBytes(file.toPath())));
 			send("--" + BOUNDARY + "--");
 			send(".");
+			receive();
 			send("QUIT");
 			receive();
 			
